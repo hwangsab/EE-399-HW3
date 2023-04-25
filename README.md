@@ -14,7 +14,7 @@ Overall, this code provides a useful demonstration of how to perform an analysis
 * [Theoretical Background](https://github.com/hwangsab/EE-399-HW3/blob/main/README.md#theoretical-background)
 * [Algorithm Implementation and Development](https://github.com/hwangsab/EE-399-HW3/blob/main/README.md#algorithm-implementation-and-development)
   * [Code Description](https://github.com/hwangsab/EE-399-HW3/blob/main/README.md#code-description)
-    * [Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization.]()
+    * [Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization]()
     * [Part I Problem 2: Singular Value Spectrum and Rank Estimation]()
     * [Part I Problem 3: Interpretation of U, Σ, and V Matrices in SVD Analysis]()
     * [Part I Problem 4: Visualization of selected V-modes of PCA with 3D scatter plot]()
@@ -26,7 +26,7 @@ Overall, this code provides a useful demonstration of how to perform an analysis
     * [Part II Problem (f): Comparing the performance between LDA, SVM, and decision tree classifiers]()
 * [Computational Results](https://github.com/hwangsab/EE-399-HW3/blob/main/README.md#computational-results)
   * [Usage](https://github.com/hwangsab/EE-399-HW3/blob/main/README.md#usage)
-  * [Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization.]()
+  * [Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization]()
   * [Part I Problem 2: Singular Value Spectrum and Rank Estimation]()
   * [Part I Problem 3: Interpretation of U, Σ, and V Matrices in SVD Analysis]()
   * [Part I Problem 4: Visualization of selected V-modes of PCA with 3D scatter plot]()
@@ -84,7 +84,7 @@ And the following additional libraries for Part II:
 * from `sklearn.tree` import `DecisionTreeClassifier`
 * from `sklearn.svm` import `SVC`
 
-#### Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization.
+#### Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization
 The first problem involves performing an SVD (Singular Value Decomposition) analysis of the digit images. The images are first reshaped into column vectors. A random sample of 4000 images is extracted for this problem. The SVD of the centered data is then computed using the numpy `linalg.svd()` function, and the first 10 singular values and their corresponding digit images are printed.
 
 ```
@@ -154,80 +154,62 @@ This problem asks to compare the performance between LDA, SVM, and decision tree
 To run the code, simply run the Python file `EE399 HW3.py` in any Python environment. The output will be 
 printed to the console and displayed in a pop-up window.
 
-#### Problem (a): Computing Correlation Matrix using Dot Product
+#### Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization
 The resultant dot product (correlation) matrix between the first 100 images are plotted as followed:  
 ![download](https://user-images.githubusercontent.com/125385468/232674818-baf7ce66-d67c-465b-96e6-94afe61e22dc.png)
 
-#### Problem (b): Identifying Highly Correlated and Uncorrelated Images
-Using the first part of the program to determine the pairs of highly correlated and uncorrelated images: 
-```
-most_correlated = np.argwhere(C == np.sort(C.flatten())[-3])
-least_correlated = np.argwhere(C == np.sort(C.flatten())[1])
-
-print (most_correlated[0], least_correlated[0])
-```
-We could determine that the pairs `[86 88]` and `[54 64]` represent the indices of the images we are looking for. 
-
-Plotting the following images yield:  
-![download](https://user-images.githubusercontent.com/125385468/232675169-a2d1cddd-13b8-47db-b0f5-4176f676c089.png)
-
-and  
-![download](https://user-images.githubusercontent.com/125385468/232675206-9cf1c489-db47-4a41-a928-71bfea5d6583.png)
-
-#### Problem (c): Computing Correlation Matrix for Subset of Images
-The resultant dot product (correlation) matrix between the first 10 images are plotted as followed:  
-![download](https://user-images.githubusercontent.com/125385468/232675344-552f1047-e830-4f7a-b9a7-c3a4ddbce12c.png)
-
-#### Problem (d): Finding the First Six Eigenvectors of $Y=XX^T$
-The resultant 6 eigenvectors with the largest magnitude eigenvalue are determined to be:
-```
-[[-0.02384327  0.04535378 -0.05653196 ... -0.00238077  0.0015886
-  -0.00041024]
- [-0.02576146  0.04567536 -0.04709124 ...  0.00265168 -0.00886967
-   0.0047811 ]
- [-0.02728448  0.04474528 -0.0362807  ... -0.00073077  0.00706009
-  -0.00678472]
- ...
- [-0.02082937 -0.03737158 -0.06455006 ... -0.0047683  -0.00596037
-  -0.0032901 ]
- [-0.0193902  -0.03557383 -0.06196898 ... -0.00173228 -0.00175508
-  -0.00131795]
- [-0.0166019  -0.02965746 -0.05241684 ...  0.00458062  0.00266653
-   0.00168849]]
-```
-
-#### Problem (e): Finding the First Six Principal Component Directions using SVD
-The first six principal component directions are determined to be:
-```
-[[-0.01219331 -0.00215188 -0.01056679 ... -0.02177117 -0.03015309
-  -0.0257889 ]
- [-0.01938848 -0.00195186  0.02471869 ...  0.04027773  0.00219562
-   0.01553129]
- [ 0.01691206  0.00143586  0.0384465  ...  0.01340245 -0.01883373
-   0.00643709]
- [ 0.0204079  -0.01201431  0.00397553 ... -0.01641295 -0.04011563
-   0.02679029]
- [-0.01902342  0.00418948  0.0384026  ... -0.01092512  0.00087341
-   0.01260435]
- [-0.0090084  -0.00624237  0.01580824 ... -0.00977639  0.00090316
-   0.00304479]]
-```
-
-#### Problem (f): Comparing First Eigenvector and First SVD Mode
-The norm of the difference of absolute values between `v_1` and `u_1` was determined to be:
-```
-7.394705201660225e-16
-```
-
-#### Problem (g): Computing Variance Captured by Each of the First 6 SVD Modes and Plotting Them
+#### Part I Problem 2: Singular Value Spectrum and Rank Estimation
 Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
 ```
-Percentage of variance captured by each SVD mode 1: 72.93%
-Percentage of variance captured by each SVD mode 2: 15.28%
-Percentage of variance captured by each SVD mode 3: 2.57%
-Percentage of variance captured by each SVD mode 4: 1.88%
-Percentage of variance captured by each SVD mode 5: 0.64%
-Percentage of variance captured by each SVD mode 6: 0.59%
+stuff
+```
+
+#### Part I Problem 3: Interpretation of U, Σ, and V Matrices in SVD Analysis
+Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+```
+stuff
+```
+
+#### Part I Problem 4: Visualization of selected V-modes of PCA with 3D scatter plot
+Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+```
+stuff
+```
+
+#### Part II Problem (a): Linear classification of two digits using LDA
+Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+```
+stuff
+```
+
+#### Part II Problem (b): Linear classification of three digits using LDA
+Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+```
+stuff
+```
+
+#### Part II Problem (c): Identifying the most difficult digit pairs to separate using LDA classifiers
+Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+```
+stuff
+```
+
+#### Part II Problem (d): Identifying the most easy digit pairs to separate using LDA classifiers
+Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+```
+stuff
+```
+
+#### Part II Problem (e): Identifying most easy and difficult digit pairs using SVM and decision tree classifiers
+Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+```
+stuff
+```
+
+#### Part II Problem (f): Comparing the performance between LDA, SVM, and decision tree classifiers
+Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+```
+stuff
 ```
 
 In addition, plotted SVD nodes were as followed:  
