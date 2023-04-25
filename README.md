@@ -156,54 +156,87 @@ printed to the console and displayed in a pop-up window.
 
 #### Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization
 The resultant dot product (correlation) matrix between the first 100 images are plotted as followed:  
-![download](https://user-images.githubusercontent.com/125385468/232674818-baf7ce66-d67c-465b-96e6-94afe61e22dc.png)
+```
+Random sample shape:  (784, 4000)
+First 10 singular values:
+     U shape:   (784, 784)
+     S shape:   (784,)
+     Vt shape:  (784, 4000)
+```
+
+![download](https://user-images.githubusercontent.com/125385468/234189618-7bb0396d-7dab-45a5-a76c-0d3ca4c840b8.png)
 
 #### Part I Problem 2: Singular Value Spectrum and Rank Estimation
 Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
-```
-stuff
-```
+
+![download](https://user-images.githubusercontent.com/125385468/234189438-3ea0b072-3c78-437a-85b8-5523b0c17f5c.png)
 
 #### Part I Problem 3: Interpretation of U, Σ, and V Matrices in SVD Analysis
-Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
-```
-stuff
-```
+Our interpretation of the different matrices were as followed:
+* Interpretation of U matrix: principal directions of the data The columns of U are the principal directions (eigenvectors) of the covariance matrix of the data The i-th column of U is the direction of greatest variance in the data projected onto the i-th principal axis U is an orthogonal matrix, so the columns are unit vectors and are mutually orthogonal
+* Interpretation of s vector: singular values The singular values are the square roots of the eigenvalues of the covariance matrix of the data The singular values are non-negative and in non-increasing order They represent the amount of variance in the data that is explained by each principal direction
+* Interpretation of V matrix: principal components of the data The rows of V are the principal components of the data The i-th row of V is the weight (or contribution) of each feature (pixel) to the i-th principal component V is also an orthogonal matrix, so the rows are unit vectors and are mutually orthogonal
 
 #### Part I Problem 4: Visualization of selected V-modes of PCA with 3D scatter plot
 Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
 ```
 stuff
 ```
+![download](https://user-images.githubusercontent.com/125385468/234189248-bf340c80-0ae1-478a-ae95-117475de4870.png)
 
 #### Part II Problem (a): Linear classification of two digits using LDA
 Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
 ```
-stuff
+Number of samples for digit 3: 7141
+Number of samples for digit 8: 6825
+
+Number of training samples: 11172
+Number of test samples: 2794
+
+Coefficients of the linear boundary: [[2.70133468]]
+Point of intersection: [-0.0986239]
+Accuracy: 0.96
 ```
 
 #### Part II Problem (b): Linear classification of three digits using LDA
 Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
 ```
-stuff
+Number of samples for digit 3: 7141
+Number of samples for digit 7: 0
+Number of samples for digit 8: 0
+
+Number of training samples: 17007
+Number of test samples: 4252
+
+Coefficients of the linear boundary: [[ 0.58481592  1.30106924]
+ [-1.60590181 -0.08605543]
+ [ 1.02108589 -1.21501381]]
+Point of intersection: [ 0.49113982 -0.47289057 -0.01824925]
+Accuracy: 0.95
 ```
 
 #### Part II Problem (c): Identifying the most difficult digit pairs to separate using LDA classifiers
 Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
 ```
-stuff
+The most difficult pair of digits to separate with LDA is (3, 5) with an accuracy of 0.95.
 ```
 
 #### Part II Problem (d): Identifying the most easy digit pairs to separate using LDA classifiers
 Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
 ```
-stuff
+The easiest pair of digits to separate with LDA is (6, 7) with an accuracy of 1.00.
 ```
 
 #### Part II Problem (e): Identifying most easy and difficult digit pairs using SVM and decision tree classifiers
 Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
 ```
-stuff
+Support vector machine computation:
+The most difficult pair of digits to separate is (3, 5) with an accuracy of 0.95.
+The most easy pair of digits to separate is (0, 1) with an accuracy of 1.00.
+  
+Decision tree computation:
+The most difficult pair of digits to separate is (2, 3) with an accuracy of 0.95.
+The most easy pair of digits to separate is (0, 1) with an accuracy of 1.00.
 ```
 
 #### Part II Problem (f): Comparing the performance between LDA, SVM, and decision tree classifiers
