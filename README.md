@@ -43,29 +43,43 @@ The code is performing binary classification of the MNIST dataset using three di
 The MNIST dataset is a popular dataset in machine learning, consisting of 70,000 images of handwritten digits from 0 to 9, with 7,000 images for each digit. The dataset is split into a training set of 60,000 images and a test set of 10,000 images. Each image is 28x28 pixels, and each pixel has a grayscale value between 0 and 255. The objective is to classify each image into one of the ten digit classes.
 
 ## Algorithm Implementation and Development:
-This homework assignment works around a dataset imported through the following lines of code:
+This homework assignment works around the MNIST dataset loaded through the following lines of code:
 ```
-import numpy as np
-from scipy.io import loadmat
-results = loadmat(’yalefaces.mat’)
-X = results[’X’]
+mnist = fetch_openml('mnist_784', parser='auto')
+X = mnist.data / 255.0  # Scale the data to [0, 1]
+y = mnist.target
 ```
 
 Completion of this project and subsequent development and implementation of the algorithm was 
 accomplished through Python as our primary programming language. 
 
 ### Code Description
-The code is written in Python and uses the following libraries:  
+The code is written in Python and uses the following libraries for Part I:  
 * `numpy` for numerical computing  
 * `matplotlib` for data visualization  
 * `math` for mathematical functions  
 * `random` for random generation
-* `scipy` for curve fitting
+* `scipy` for regression
+
+* from `sklearn.datasets` import `fetch_openml`
+* from `sklearn.decomposition` import `PCA`
+* import `matplotlib.pyplot` as `plt`
+* from `mpl_toolkits.mplot3d` import `Axes3D`
+
+* from `scipy.io` import `loadmat`
+* from `scipy.sparse.linalg` import `eigs`
+* from `numpy` import `linalg`
+
+And the following additional libraries for Part II:
+* from `sklearn.discriminant_analysis` import `LinearDiscriminantAnalysis`
+* from `sklearn.model_selection` import `train_test_split`
+* from `sklearn.linear_model` import `LogisticRegression`
+* from `sklearn.metrics` import `accuracy_score`
+* from `sklearn.tree` import `DecisionTreeClassifier`
+* from `sklearn.svm` import `SVC`
 
 #### Part I Problem 1: 
 The first problem involves performing an SVD (Singular Value Decomposition) analysis of the digit images. The images are first reshaped into column vectors. A random sample of 4000 images is extracted for this problem. The SVD of the centered data is then computed using the numpy `linalg.svd()` function, and the first 10 singular values and their corresponding digit images are printed.
-
-more stuff here
 
 ```
 images = X[:, :100]
@@ -73,8 +87,6 @@ C = np.matmul(images.T, images)
 ```
 #### Part I Problem 2: 
 The second problem involves finding the number of modes (rank r of the digit space) necessary for good image reconstruction by analyzing the singular value spectrum. The SVD is performed on the full dataset, and the index of the first singular value that explains at least 90% of the total variance is found. The proportion of total variance explained by each singular value is then computed and plotted to show the singular value spectrum.
-
-more stuff here
 
 ```
 most_correlated = np.argwhere(C == np.sort(C.flatten())[-3])
@@ -132,9 +144,8 @@ Similarly to problem (d) and problem (e), this problem asks for computation of t
 ## Computational Results:
 
 ### Usage
-To run the code, simply run the Python file `hw2.py` in any Python environment. The output will be 
-printed to the console and displayed in a pop-up window. The `matplotlib` library is required to 
-display the images in the form of a plot. 
+To run the code, simply run the Python file `EE399 HW3.py` in any Python environment. The output will be 
+printed to the console and displayed in a pop-up window.
 
 #### Problem (a): Computing Correlation Matrix using Dot Product
 The resultant dot product (correlation) matrix between the first 100 images are plotted as followed:  
