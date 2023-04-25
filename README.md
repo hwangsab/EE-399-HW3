@@ -60,16 +60,16 @@ The code is written in Python and uses the following libraries for Part I:
 * `math` for mathematical functions  
 * `random` for random generation
 * `scipy` for regression
-
+  
 * from `sklearn.datasets` import `fetch_openml`
 * from `sklearn.decomposition` import `PCA`
 * import `matplotlib.pyplot` as `plt`
 * from `mpl_toolkits.mplot3d` import `Axes3D`
-
+  
 * from `scipy.io` import `loadmat`
 * from `scipy.sparse.linalg` import `eigs`
 * from `numpy` import `linalg`
-
+  
 And the following additional libraries for Part II:
 * from `sklearn.discriminant_analysis` import `LinearDiscriminantAnalysis`
 * from `sklearn.model_selection` import `train_test_split`
