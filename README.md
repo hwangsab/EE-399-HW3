@@ -54,18 +54,18 @@ Completion of this project and subsequent development and implementation of the 
 accomplished through Python as our primary programming language. 
 
 ### Code Description
-The code is written in Python and uses the following libraries for Part I:  
+The code is written in Python and uses the following overarching libraries:  
 * `numpy` for numerical computing  
 * `matplotlib` for data visualization  
 * `math` for mathematical functions  
 * `random` for random generation
 * `scipy` for regression
-  
+
+The code also uses the following libraries for Part I:
 * from `sklearn.datasets` import `fetch_openml`
 * from `sklearn.decomposition` import `PCA`
 * import `matplotlib.pyplot` as `plt`
 * from `mpl_toolkits.mplot3d` import `Axes3D`
-  
 * from `scipy.io` import `loadmat`
 * from `scipy.sparse.linalg` import `eigs`
 * from `numpy` import `linalg`
