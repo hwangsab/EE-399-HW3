@@ -78,14 +78,14 @@ And the following additional libraries for Part II:
 * from `sklearn.tree` import `DecisionTreeClassifier`
 * from `sklearn.svm` import `SVC`
 
-#### Part I Problem 1: 
+#### Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization.
 The first problem involves performing an SVD (Singular Value Decomposition) analysis of the digit images. The images are first reshaped into column vectors. A random sample of 4000 images is extracted for this problem. The SVD of the centered data is then computed using the numpy `linalg.svd()` function, and the first 10 singular values and their corresponding digit images are printed.
 
 ```
 images = X[:, :100]
 C = np.matmul(images.T, images)
 ```
-#### Part I Problem 2: 
+#### Part I Problem 2: Singular Value Spectrum and Rank Estimation
 The second problem involves finding the number of modes (rank r of the digit space) necessary for good image reconstruction by analyzing the singular value spectrum. The SVD is performed on the full dataset, and the index of the first singular value that explains at least 90% of the total variance is found. The proportion of total variance explained by each singular value is then computed and plotted to show the singular value spectrum.
 
 ```
@@ -94,7 +94,7 @@ least_correlated = np.argwhere(C == np.sort(C.flatten())[1])
 
 print (most_correlated[0], least_correlated[0])
 ```
-#### Part I Problem 3: 
+#### Part I Problem 3: Interpretation of U, Σ, and V Matrices in SVD Analysis
 The third problem asks for the interpretation of the U, Σ, and V matrices in SVD. There is no explicit code to answer this problem.
 
 ```
@@ -104,10 +104,8 @@ image_list = X[:, np.subtract(images, 1)]
 C = np.ndarray((10, 10))
 C = np.matmul(image_list.T, image_list)
 ```
-#### Part I Problem 4: 
+#### Part I Problem 4: Visualization of selected V-modes of PCA with 3D scatter plot
 The fourth problem involves projecting the images onto three selected V-modes (columns) colored by their digit label on a 3D plot. For this problem, the MNIST data is again loaded, and PCA (Principal Component Analysis) is performed on the data using the `PCA` function from `sklearn.decomposition`. The second, third, and fifth principal components are selected, and the 3D scatter plot is created using the `mpl_toolkits.mplot3d` module.
-
-more stuff here
 
 ```
 Y = np.dot(X, X.T)
@@ -118,28 +116,31 @@ eigenvectors = eigenvectors[:, W]
 
 v_1 = eigenvectors[:, 0]
 ```
-#### Part II Problem (a): Finding the First Six Principal Component Directions using SVD
+#### Part II Problem (a): Linear classification of two digits using LDA
 This problem involves the selection of two digits (3 and 8) from the dataset and tries to build a linear classifier to classify them. It first selects only the data samples for these two digits and applies LDA to reduce the dimensionality of the data. It then trains a logistic regression classifier on the transformed data and evaluates its accuracy on a test set.
 
 ```
 U, S, V = np.linalg.svd(X, full_matrices = False)
 first_six = V[:6, :]
 ```
-#### Part II Problem (b): Comparing First Eigenvector and First SVD Mode
+#### Part II Problem (b): Linear classification of three digits using LDA
 Problem (b) is an extension of problem (a), only now the code selects three digits (3, 7, and 8) from the dataset and tries to build a linear classifier to classify them. It follows the same process as in section (a) to prepare the data and train a classifier.
 
 ```
 u_1 = U[:, 0]
 norm_of_difference = np.linalg.norm(np.abs(v_1) - np.abs(u_1))
 ```
-#### Part II Problem (c): Computing Variance Captured by Each of the First 6 SVD Modes and Plotting Them
+#### Part II Problem (c): Identifying the most difficult digit pairs to separate using LDA classifiers
 This problem compares all pairs of digits in the dataset to determine which pair is most difficult to separate. It calculates the accuracy of the LDA classifier on the test set for each pair of digits and stores the results in a dictionary.
 
-#### Part II Problem (d): Computing Variance Captured by Each of the First 6 SVD Modes and Plotting Them
+#### Part II Problem (d): Identifying the most easy digit pairs to separate using LDA classifiers
 This problem asks to determine the two digits that are the easiest to separate, the code compares all pairs of digits and stores their accuracy using LDA for dimensionality reduction and Logistic Regression for classification. The digit pair with the highest accuracy is considered the easiest to separate.
 
-#### Part II Problem (e): Computing Variance Captured by Each of the First 6 SVD Modes and Plotting Them
+#### Part II Problem (e): Identifying most easy and difficult digit pairs using SVM and decision tree classifiers
 Similarly to problem (d) and problem (e), this problem asks for computation of the two digits easiest to separate, as well as the two digits most difficult to separate, using SVM and decision tree classifiers. 
+
+#### Part II Problem (f): Comparing the performance between LDA, SVM, and decision tree classifiers
+This problem asks to compare the performance between LDA, SVM, and decision trees on the hardest and easiest pair of digits to separate. There is also no explicit code to answer this problem.
 
 ## Computational Results:
 
