@@ -240,13 +240,7 @@ The most easy pair of digits to separate is (0, 1) with an accuracy of 1.00.
 ```
 
 #### Part II Problem (f): Comparing the performance between LDA, SVM, and decision tree classifiers
-Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
-```
 stuff
-```
-
-In addition, plotted SVD nodes were as followed:  
-![download](https://user-images.githubusercontent.com/125385468/232675682-a428b9fe-b24c-483a-9631-1cf849293455.png)
 
 ## Summary and Conclusions:
 stuff here
