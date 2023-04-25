@@ -87,63 +87,152 @@ And the following additional libraries for Part II:
 #### Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization
 The first problem involves performing an SVD (Singular Value Decomposition) analysis of the digit images. The images are first reshaped into column vectors. A random sample of 4000 images is extracted for this problem. The SVD of the centered data is then computed using the numpy `linalg.svd()` function, and the first 10 singular values and their corresponding digit images are printed.
 
+Computation of SVD from the centered data is dependent on the following line of code
 ```
-images = X[:, :100]
-C = np.matmul(images.T, images)
+U, S, Vt = np.linalg.svd(X_sample, full_matrices=False)
 ```
 #### Part I Problem 2: Singular Value Spectrum and Rank Estimation
 The second problem involves finding the number of modes (rank r of the digit space) necessary for good image reconstruction by analyzing the singular value spectrum. The SVD is performed on the full dataset, and the index of the first singular value that explains at least 90% of the total variance is found. The proportion of total variance explained by each singular value is then computed and plotted to show the singular value spectrum.
 
-```
-most_correlated = np.argwhere(C == np.sort(C.flatten())[-3])
-least_correlated = np.argwhere(C == np.sort(C.flatten())[1])
+The index of the first singular value that explains at least 90% of the total variance was calculated using `r = np.sum(S > ((1.00 - 0.9) * s[0]))`
+Whereas the computation of the proportion of total variance was explained by `var_exp = (S**2)`
 
-print (most_correlated[0], least_correlated[0])
-```
 #### Part I Problem 3: Interpretation of U, Σ, and V Matrices in SVD Analysis
 The third problem asks for the interpretation of the U, Σ, and V matrices in SVD. There is no explicit code to answer this problem.
 
-```
-images = [1, 313, 512, 5, 2400, 113, 1024, 87, 314, 2005]
-image_list = X[:, np.subtract(images, 1)]
-
-C = np.ndarray((10, 10))
-C = np.matmul(image_list.T, image_list)
-```
 #### Part I Problem 4: Visualization of selected V-modes of PCA with 3D scatter plot
 The fourth problem involves projecting the images onto three selected V-modes (columns) colored by their digit label on a 3D plot. For this problem, the MNIST data is again loaded, and PCA (Principal Component Analysis) is performed on the data using the `PCA` function from `sklearn.decomposition`. The second, third, and fifth principal components are selected, and the 3D scatter plot is created using the `mpl_toolkits.mplot3d` module.
 
+PCA was performed on the data by using the lines
 ```
-Y = np.dot(X, X.T)
-eigenvalues, eigenvectors = np.linalg.eigh(Y)
-
-W = np.argsort(eigenvalues)[::-1]
-eigenvectors = eigenvectors[:, W]
-
-v_1 = eigenvectors[:, 0]
+pca = PCA(n_components=784)
+X_pca = pca.fit_transform(X)
 ```
+And then the 2nd, 3rd, and 5th principal components were selected to create a scatter plot using the following code:
+```
+# Select the 2nd, 3rd, and 5th principal components
+v_modes = [1, 2, 4]  # Note that we use 1-based indexing here
+X_pca_selected = X_pca[:, v_modes]
+
+# Create the 3D scatter plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(X_pca_selected[:, 0], X_pca_selected[:, 1], X_pca_selected[:, 2], c=y.astype(int), s=1)
+```
+
 #### Part II Problem (a): Linear classification of two digits using LDA
 This problem involves the selection of two digits (3 and 8) from the dataset and tries to build a linear classifier to classify them. It first selects only the data samples for these two digits and applies LDA to reduce the dimensionality of the data. It then trains a logistic regression classifier on the transformed data and evaluates its accuracy on a test set.
 
+The selection of the two digits (in this case, 3 and 8) were used by the following lines of code:
 ```
-U, S, V = np.linalg.svd(X, full_matrices = False)
-first_six = V[:6, :]
+digit1 = 3
+digit2 = 8
+X = X[(y == digit1) | (y == digit2)]
+y = y[(y == digit1) | (y == digit2)]
+y[y == digit1] = 0
+y[y == digit2] = 1
 ```
+
+And the subsequent application of LDA, training of a logistic regression classifier and applying the LDA to the test data was computed using the following code:
+```
+# Apply LDA to reduce the dimensionality of the data
+lda = LinearDiscriminantAnalysis()
+X_lda_train = lda.fit_transform(X_train, y_train)
+
+# Train a logistic regression classifier on the LDA-transformed data
+clf = LogisticRegression(random_state=42)
+clf.fit(X_lda_train, y_train)
+
+# Apply LDA to the test data and make predictions
+X_lda_test = lda.transform(X_test)
+y_pred = clf.predict(X_lda_test)
+```
+
 #### Part II Problem (b): Linear classification of three digits using LDA
 Problem (b) is an extension of problem (a), only now the code selects three digits (3, 7, and 8) from the dataset and tries to build a linear classifier to classify them. It follows the same process as in section (a) to prepare the data and train a classifier.
 
+The selection of the three digits (in this case, 3, 7 and 8) were used by the following lines of code:
 ```
-u_1 = U[:, 0]
-norm_of_difference = np.linalg.norm(np.abs(v_1) - np.abs(u_1))
+digit1 = 3
+digit2 = 7
+digit3 = 8
+
+X = mnist.data.astype('float32')
+y = mnist.target.astype('int64')
+
+X = X[(y == digit1) | (y == digit2) | (y == digit3)]
+y = y[(y == digit1) | (y == digit2) | (y == digit3)]
+y[y == digit1] = 0
+y[y == digit2] = 1
+y[y == digit3] = 2
 ```
+
+And the subsequent application of LDA, training of a logistic regression classifier and applying the LDA to the test data was computed using the same steps as prior in problem (a). 
+
 #### Part II Problem (c): Identifying the most difficult digit pairs to separate using LDA classifiers
 This problem compares all pairs of digits in the dataset to determine which pair is most difficult to separate. It calculates the accuracy of the LDA classifier on the test set for each pair of digits and stores the results in a dictionary.
+
+This problem was implemented by creating a loop that would implement through all existing pairs of digits within the data set.
+```
+for digit1, digit2 in digit_pairs:
+    
+    # Select only two digits
+    X_pair = X[(y == digit1) | (y == digit2)]
+    y_pair = y[(y == digit1) | (y == digit2)]
+    y_pair[y_pair == digit1] = 0
+    y_pair[y_pair == digit2] = 1
+    
+    # Split the data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X_pair, y_pair, test_size=0.2, random_state=42)
+    
+    # Apply LDA to reduce the dimensionality of the data
+    lda = LinearDiscriminantAnalysis()
+    X_lda_train = lda.fit_transform(X_train, y_train)
+    X_lda_test = lda.transform(X_test)
+    
+    # Train a logistic regression classifier on the LDA-transformed data
+    clf = LogisticRegression(random_state=42)
+    clf.fit(X_lda_train, y_train)
+    
+    # Make predictions on the test data
+    y_pred = clf.predict(X_lda_test)
+    
+    # Calculate the accuracy of the classifier
+    accuracy = accuracy_score(y_test, y_pred)
+    
+    # Store the accuracy for this digit pair in the dictionary
+    accuracy_dict_lda[(digit1, digit2)] = accuracy
+```
+
+Then, the determination of which pair was most difficult was computed by finding the pair that had the lowest accuracy value.
+```
+most_difficult_pair_lda = min(accuracy_dict_lda, key=accuracy_dict_lda.get)
+```
 
 #### Part II Problem (d): Identifying the most easy digit pairs to separate using LDA classifiers
 This problem asks to determine the two digits that are the easiest to separate, the code compares all pairs of digits and stores their accuracy using LDA for dimensionality reduction and Logistic Regression for classification. The digit pair with the highest accuracy is considered the easiest to separate.
 
+The process and implementation for this problem is the same as the implementation for problem (c), only this time the determination of which pair was most easy was computed by finding the pair that had the highest accuracy value:
+
+```
+most_easy_pair_lda = max(accuracy_dict_lda, key=accuracy_dict_lda.get)
+```
+
 #### Part II Problem (e): Identifying most easy and difficult digit pairs using SVM and decision tree classifiers
 Similarly to problem (d) and problem (e), this problem asks for computation of the two digits easiest to separate, as well as the two digits most difficult to separate, using SVM and decision tree classifiers. 
+
+As such, the implementation of this code is the same as the code for problem (d) and problem (e), only different on the type of classifier being trained. 
+For example, whereas the SVM classifier uses the following line of code: 
+```
+clf = SVC(kernel='linear', random_state=42)
+clf.fit(X_lda_train, y_train)
+```
+
+The decision tree classifier will use this line instead:
+```
+clf = DecisionTreeClassifier(random_state=42)
+clf.fit(X_train, y_train)
+```
 
 #### Part II Problem (f): Comparing the performance between LDA, SVM, and decision tree classifiers
 This problem asks to compare the performance between LDA, SVM, and decision trees on the hardest and easiest pair of digits to separate. There is also no explicit code to answer this problem.
@@ -182,7 +271,7 @@ Computing the percentage of variance captured by each of the first 6 SVD modes y
 ```
 stuff
 ```
-![download](https://user-images.githubusercontent.com/125385468/234189248-bf340c80-0ae1-478a-ae95-117475de4870.png)
+![download](https://user-images.githubusercontent.com/125385468/234191754-e5cc932f-7281-4024-8174-708ba131d0e6.png)
 
 #### Part II Problem (a): Linear classification of two digits using LDA
 Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
