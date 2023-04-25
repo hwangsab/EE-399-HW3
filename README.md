@@ -244,7 +244,7 @@ To run the code, simply run the Python file `EE399 HW3.py` in any Python environ
 printed to the console and displayed in a pop-up window.
 
 #### Part I Problem 1: SVD Analysis of Digit Images with Random Sampling and Visualization
-The resultant dot product (correlation) matrix between the first 100 images are plotted as followed:  
+The resultant 10 singular values of the SVD centered data were determined to be:
 ```
 Random sample shape:  (784, 4000)
 First 10 singular values:
@@ -252,13 +252,14 @@ First 10 singular values:
      S shape:   (784,)
      Vt shape:  (784, 4000)
 ```
-
+In addition, the printed digit images corresponding to the first 10 columns of the centered data matrix are displayed: 
 ![download](https://user-images.githubusercontent.com/125385468/234189618-7bb0396d-7dab-45a5-a76c-0d3ca4c840b8.png)
 
 #### Part I Problem 2: Singular Value Spectrum and Rank Estimation
-Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
-
+The plotted singular value spectrum is as follows:
 ![download](https://user-images.githubusercontent.com/125385468/234189438-3ea0b072-3c78-437a-85b8-5523b0c17f5c.png)
+
+From the code, we were able to compute that the rank of digit space for 90% of the variance explained was 28. 
 
 #### Part I Problem 3: Interpretation of U, Σ, and V Matrices in SVD Analysis
 Our interpretation of the different matrices were as followed:
@@ -267,14 +268,11 @@ Our interpretation of the different matrices were as followed:
 * Interpretation of V matrix: principal components of the data The rows of V are the principal components of the data The i-th row of V is the weight (or contribution) of each feature (pixel) to the i-th principal component V is also an orthogonal matrix, so the rows are unit vectors and are mutually orthogonal
 
 #### Part I Problem 4: Visualization of selected V-modes of PCA with 3D scatter plot
-Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
-```
-stuff
-```
+The three selected V-modes were visualized into the following plot: 
 ![download](https://user-images.githubusercontent.com/125385468/234191754-e5cc932f-7281-4024-8174-708ba131d0e6.png)
 
 #### Part II Problem (a): Linear classification of two digits using LDA
-Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+The linear classifier for 2 selected digits was built around the following parameters:
 ```
 Number of samples for digit 3: 7141
 Number of samples for digit 8: 6825
@@ -282,13 +280,13 @@ Number of samples for digit 8: 6825
 Number of training samples: 11172
 Number of test samples: 2794
 
-Coefficients of the linear boundary: [[2.70133468]]
+Coefficients of the linear boundary: [2.70133468]
 Point of intersection: [-0.0986239]
 Accuracy: 0.96
 ```
 
 #### Part II Problem (b): Linear classification of three digits using LDA
-Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+The linear classifier for 3 selected digits was built around the following parameters:
 ```
 Number of samples for digit 3: 7141
 Number of samples for digit 7: 0
@@ -305,19 +303,13 @@ Accuracy: 0.95
 ```
 
 #### Part II Problem (c): Identifying the most difficult digit pairs to separate using LDA classifiers
-Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
-```
-The most difficult pair of digits to separate with LDA is (3, 5) with an accuracy of 0.95.
-```
+Using the LDA classifier to determine which digit pairs was most easy to separte it was concluded that the most difficult pair of digits to separate with LDA is (3, 5) with an accuracy of 0.95.
 
 #### Part II Problem (d): Identifying the most easy digit pairs to separate using LDA classifiers
-Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
-```
-The easiest pair of digits to separate with LDA is (6, 7) with an accuracy of 1.00.
-```
+Using the LDA classifier to determine which digit pairs was most easy to separte it was concluded that the easiest pair of digits to separate with LDA is (6, 7) with an accuracy of 1.00.
 
 #### Part II Problem (e): Identifying most easy and difficult digit pairs using SVM and decision tree classifiers
-Computing the percentage of variance captured by each of the first 6 SVD modes yielded:
+The next two classifiers that were tested yielded the following conclusions on which digit pairs were most difficult and most easy to separate: 
 ```
 Support vector machine computation:
 The most difficult pair of digits to separate is (3, 5) with an accuracy of 0.95.
@@ -329,9 +321,11 @@ The most easy pair of digits to separate is (0, 1) with an accuracy of 1.00.
 ```
 
 #### Part II Problem (f): Comparing the performance between LDA, SVM, and decision tree classifiers
-stuff
+From what could be observed, it appears that the most difficult digit to distinguish is 3, which is observed to have the lowest accuracy of distinguishment with digit 5 for both the LDA and SVM classifiers, and with digit 2 for the decision tree classifier.
+
+On the other hand, the most easy digit to distinguish appears to be 0 and 1, which are distinguished with the SVM and the decision tree model with a full accuracy of 100%.
+
+Overall, the SVM classifier shares its performance with the LDA classifier for determining the most difficult pair of digits to separate, but shares its performance with the decision tree classifier for determining the most easy pair of digits to separate. The LDA classifier and decision trees classifier share the least in common, besides the overarching idea that the digit 3 is the most difficult digit to distinguish.
 
 ## Summary and Conclusions:
-stuff here
-
 Overall, this assignment provided a comprehensive analysis of the MNIST dataset using various classification techniques, and evaluated their performance on different pairs of digits. It demonstrated the importance of feature selection and the power of different classifiers for identifying patterns in data.
