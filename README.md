@@ -256,7 +256,7 @@ In addition, the printed digit images corresponding to the first 10 columns of t
 ![download](https://user-images.githubusercontent.com/125385468/234189618-7bb0396d-7dab-45a5-a76c-0d3ca4c840b8.png)
 
 #### Part I Problem 2: Singular Value Spectrum and Rank Estimation
-The plotted singular value spectrum is as follows:
+The plotted singular value spectrum is as follows:  
 ![download](https://user-images.githubusercontent.com/125385468/234189438-3ea0b072-3c78-437a-85b8-5523b0c17f5c.png)
 
 From the code, we were able to compute that the rank of digit space for 90% of the variance explained was 28. 
