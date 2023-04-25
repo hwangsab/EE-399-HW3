@@ -94,7 +94,7 @@ U, S, Vt = np.linalg.svd(X_sample, full_matrices=False)
 #### Part I Problem 2: Singular Value Spectrum and Rank Estimation
 The second problem involves finding the number of modes (rank r of the digit space) necessary for good image reconstruction by analyzing the singular value spectrum. The SVD is performed on the full dataset, and the index of the first singular value that explains at least 90% of the total variance is found. The proportion of total variance explained by each singular value is then computed and plotted to show the singular value spectrum.
 
-The index of the first singular value that explains at least 90% of the total variance was calculated using `r = np.sum(S > ((1.00 - 0.9) * s[0]))`
+The index of the first singular value that explains at least 90% of the total variance was calculated using ```r = np.sum(S > ((1.00 - 0.9) * s[0]))```
 Whereas the computation of the proportion of total variance was explained by `var_exp = (S**2)`
 
 #### Part I Problem 3: Interpretation of U, Σ, and V Matrices in SVD Analysis
